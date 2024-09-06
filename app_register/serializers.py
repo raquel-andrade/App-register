@@ -27,6 +27,7 @@ class RegisterSerializer(serializers.ModelSerializer):
         )
         return user
 
+
 class LoginSerializer(serializers.Serializer):
     email = serializers.EmailField(required=True)
     password = serializers.CharField(required=True)
@@ -35,11 +36,10 @@ class LoginSerializer(serializers.Serializer):
         email = attrs.get('email')
         password = attrs.get('password')
 
-        if email and password:
-            user = authenticate(email=email, password=password)
-            if user:
-                attrs['user'] = user
-            else:
-                raise serializers.ValidationError("Email ou senha inválidos.")
+        # Autentica o usuário
+        user = authenticate(email=email, password=password)
+        if not user:
+            raise serializers.ValidationError("Email ou senha inválidos.")
         
+        attrs['user'] = user
         return attrs

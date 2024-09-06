@@ -19,16 +19,19 @@ schema_view = get_schema_view(
 )
 
 urlpatterns = [
+    path('home/', views.home_view, name='home'),
     path('', views.cadastro, name='cadastro'),
-    path('login/', views.login, name='login'),
-    path('home/', views.home, name='home'),
+    path('login/', views.login, name='login'),  
+    path('login-api/', LoginView.as_view(), name='login-api'),  
+
     path('users/', UserListView.as_view(), name='user-list'),
     path('users/<int:pk>/', UserDetailView.as_view(), name='user-detail'),
     path('users/<int:pk>/update/', UserUpdateView.as_view(), name='user-update'),
     path('users/<int:pk>/delete/', UserDeleteView.as_view(), name='user-delete'),
+
+    path('register/', RegisterView.as_view(), name='register'),
+
     re_path(r'^swagger(?P<format>.json|.yaml)$', schema_view.without_ui(cache_timeout=0), name='schema-json'),
     path('swagger/', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
     path('redoc/', schema_view.with_ui('redoc', cache_timeout=0), name='schema-redoc'),
-    path('register/', RegisterView.as_view(), name='register'),
-    path('login/', LoginView.as_view(), name='login')
 ]

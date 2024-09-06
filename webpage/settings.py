@@ -97,3 +97,7 @@ DATABASES = {
 }
 
 
+AUTHENTICATION_BACKENDS = [
+    'app_register.backends.EmailBackend',  
+    'django.contrib.auth.backends.ModelBackend',
+]
