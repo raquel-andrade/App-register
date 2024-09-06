@@ -7,17 +7,21 @@ from app_register.views import RegisterView, LoginView, UserListView, UserDetail
 
 schema_view = get_schema_view(
     openapi.Info(
-        title= "api",
-        default_version= 'v1',
-        description= "Documentação",
+        title="API",
+        default_version='v1',
+        description="Documentação",
+        terms_of_service="https://www.google.com/policies/terms/",
+        contact=openapi.Contact(email="contact@myapi.local"),
+        license=openapi.License(name="BSD License"),
     ),
-    public= True, 
-    permission_classes= (permissions.AllowAny,),
+    public=True,
+    permission_classes=(permissions.AllowAny,),
 )
 
 urlpatterns = [
     path('', views.cadastro, name='cadastro'),
     path('login/', views.login, name='login'),
+    path('home/', views.home, name='home'),
     path('users/', UserListView.as_view(), name='user-list'),
     path('users/<int:pk>/', UserDetailView.as_view(), name='user-detail'),
     path('users/<int:pk>/update/', UserUpdateView.as_view(), name='user-update'),
@@ -28,4 +32,3 @@ urlpatterns = [
     path('register/', RegisterView.as_view(), name='register'),
     path('login/', LoginView.as_view(), name='login')
 ]
-

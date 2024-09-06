@@ -1,12 +1,11 @@
-version: '3.8'
-
 services:
   backend:
     build:
-      context: ./webpage  
+      context: ./webpage
     ports:
       - "8000:8000"
     volumes:
-      - ./webpage:/app
+      - ./webpage:/app/webpage
+      - ./app_register:/app/app_register  
     environment:
       - DJANGO_SETTINGS_MODULE=webpage.settings
